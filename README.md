@@ -16,6 +16,7 @@ Space bar  :  Reset square <br/>
 8 key  :  paint purple<br/>
 Pressing shift and a color at the same same will paint a lighter version of that color except for orange and yellow
 ### Other Stuff
+R Key  :  Reset  canvas
 W key  :  Change Y position on canvas up by one<br/>
 A key  :  Change X position on canvas left by one<br/>
 S key  :  Change Y position on canvas down by one<br/>
