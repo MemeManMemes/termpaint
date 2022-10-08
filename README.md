@@ -1,4 +1,4 @@
-# THIS PROGRAM ONLY WORKS WITH LINUX MACHINES WITH THE BASH KERNEL 
+# THIS PROGRAM ONLY WORKS WITH LINUX MACHINES WITH THE BASH SHELL 
 
 # Termpaint
 Alright, so I made this application because I really like terminal/kernel text editors and instead of making just another text editor, I decided to make a painting editor!  Compile with ```g++ -std=c++20```.  It's your job to move this file to ```/usr/bin```, not mine.  Also, you can access saved files by typing in the filepath of termpaint as well as the filepath of the paint file. Example: ```termpaint  /home/user/Desktop/paint.sdpiff```<br/>video: https://www.youtube.com/watch?v=7HlXqYoEGGI&t
