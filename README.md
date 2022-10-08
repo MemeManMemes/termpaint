@@ -16,11 +16,11 @@ Space bar  :  Reset square <br/>
 8 key  :  paint purple<br/>
 Pressing shift and a color at the same same will paint a lighter version of that color except for orange and yellow
 ### Other Stuff
-W key  :  Change Y position on canvas up by one
-A key  :  Change X position on canvas left by one
-S key  :  Change Y position on canvas down by one
-D key  :  Change X position on canvas right by one
-0 key  :  Save file
-; key  :  Resize canvas
+W key  :  Change Y position on canvas up by one<br/>
+A key  :  Change X position on canvas left by one<br/>
+S key  :  Change Y position on canvas down by one<br/>
+D key  :  Change X position on canvas right by one<br/>
+0 key  :  Save file<br/>
+; key  :  Resize canvas<br/>
 ### Have a good day/night
 PS: If the colors don't work, that means your software does not support ANSI codes
