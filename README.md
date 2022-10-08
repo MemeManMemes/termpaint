@@ -1,7 +1,7 @@
 # THIS PROGRAM ONLY WORKS WITH LINUX MACHINES WITH THE BASH KERNEL 
 
 # Termpaint
-Alright, so I made this application because I really like terminal/kernel text editors and instead of making just another text editor, I decided to make a painting editor!  Compile with ```g++ -std=c++20```
+Alright, so I made this application because I really like terminal/kernel text editors and instead of making just another text editor, I decided to make a painting editor!  Compile with ```g++ -std=c++20```.  It's your job to move this file to ```/usr/bin```, not mine
 
 ## Usage:
 ### Colors:
@@ -23,3 +23,4 @@ D key  :  Change X position on canvas right by one
 0 key  :  Save file
 ; key  :  Resize canvas
 ### Have a good day/night
+PS: If the colors don't work, that means your software does not support ANSI codes
