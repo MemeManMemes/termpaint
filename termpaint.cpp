@@ -251,6 +251,8 @@ int main (int argc, char** argv)
 		}
 	}
 	
+	bool typingmode = false;
+	
 	bool exit = false;
 	system("clear");
 	cout << "\e[?25l";
@@ -311,6 +313,45 @@ int main (int argc, char** argv)
 			{
 				x++;
 				setarea();
+			}
+		}
+		
+		else if (key == '\033') 
+		{
+			gkey();
+			switch (gkey()) 
+			{
+				case 'A':
+					if (y != 0) 
+					{
+						y--;
+						setarea();
+					}
+				break;
+				
+				case 'B':
+					if (y < lines - 1) 
+					{
+						y++;
+						setarea();
+					}
+				break;
+				
+				case 'C':
+					if (x < cols - 1) 
+					{
+						x++;
+						setarea();
+					}
+				break;
+				
+				case 'D':
+					if (x != 0) 
+					{
+						x--;
+						setarea();
+					}
+				break;
 			}
 		}
 		
@@ -524,7 +565,7 @@ int main (int argc, char** argv)
 			system("clear");
 			cout << "termpaint: an application used to paint inside of a terminal - press keyboard keys to paint or do commands" << endl << endl << "(Press corresponding key on keyboard) Possible commands:" << endl << endl << "0  :  save file\n1  :  paint white  \033[37m■\033[0m  r\n";
 			cout << "2  :  paint red    \033[0;31m■\033[0m  a\n3  :  paint orange \033[0;33m■\033[0m  i\n4  :  paint yellow \033[1;33m■\033[0m  n\n5  :  paint green  \033[0;32m■\033[0m  b\n6  :  paint cyan   \033[0;36m■\033[0m  o\n7  :  paint blue   \033[0;34m■\033[0m  w\n8  :  paint purple \033[0;35m■\033[0m  !";
-			cout << "\nr  :  reset canvas\n;  :  resize canvas\nh  :  get help or exit help\nq  :  exit program without saving\n";
+			cout << "\nr  :  reset canvas\n;  :  resize canvas\nh  :  get help or exit help\nq  :  exit program without saving\nw or up arrow  :  move Y position up by one\na or left arrow  :  move X position left by one\ns or down arrow  :  move Y posiiton down by one\nd or right arrow  :  move X position right by one\n";
 			cout << "\nPressing shift + the number you want to paint will give a lighter version of that color except for orange and yellow which do not have that function";
 		}
 		
