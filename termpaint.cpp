@@ -450,7 +450,8 @@ int main (int argc, char** argv)
 				
 				if (!skill)
 				{
-					str = getenv("HOME"); + "/" + str;
+					string homeDir = getenv("HOME");
+					str = homeDir + "/" + str;
 					file.open(str, ios::binary | ios::out);
 					file << char(cols) << char(lines);
 					for (uint16_t i = 0; i < lines * cols; i++)
