@@ -14,7 +14,7 @@ Thanks to r2boyo25 for the ability to move around the canvas with the arrow keys
 2) User-made rectangles/squares
 3) Windows version
 
-## Usage:
+### Usage:
 ### Colors:
 Space bar  :  Reset sector <br/>
 1 key  :  Paint white<br/>
