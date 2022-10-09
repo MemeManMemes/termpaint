@@ -5,7 +5,6 @@ Alright, so I made this application because I really like terminal/kernel text e
 Thanks to r2boyo25 for the ability to move around the canvas with the arrow keys
 
 ## Most recent updates (top 3)
-------------------------------
 1) Code readability and format as well as ability to switch between paint/command and text mode
 2) Ability to move around canvas with arrow keys
 3) Better file saving
