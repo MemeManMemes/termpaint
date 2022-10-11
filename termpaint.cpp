@@ -7,106 +7,29 @@
 #include <cstring>
 #include <deque>
 using namespace std;
-uint16_t x = 0;
-uint16_t y = 0;
+
+uint8_t x = 0;
+uint8_t y = 0;
 uint16_t cols = 32;
 uint16_t lines = 32;
 char accepted[62] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 struct winsize w;
 uint8_t mode = 0;
 char key;
-deque<uint16_t> color;
+deque<uint8_t> color;
+deque<uint8_t> character;
 
-int gkey() 
-{
-  system ("/bin/stty raw");
-  int c;
-  system ("/bin/stty -echo");
-  c = getc(stdin);
-  system ("/bin/stty echo");
-  system ("/bin/stty cooked");
-  return c;
-}
-
-int dir(const char *path)
-{
-    struct stat stats;
-    stat(path, &stats);
-    if (S_ISDIR(stats.st_mode)) return 1;
-    return 0;
-}
-
-void setarea()
-{
-	system("clear");
-	cout << "IRRADIX TERMPAINT v1.00 - ";
-	if (cols < 10) cout << "0";
-	cout << uint16_t(cols) << "x";
-	if (lines < 10) cout << "0";
-	cout << uint16_t(lines) << " canvas";
-	cout << endl << " ";
-	for (uint8_t i = 0; i < cols; i++) cout << "__";
-	cout << endl;
-	for (uint16_t i = 0; i < lines; i++)
-	{
-		cout << "|";
-		for (uint16_t j = 0; j < cols; j++)
-		{
-			if ((y * cols) + x == (i * cols) + j)
-			{
-				if (color[(i * cols) + j] == 1) cout << " \033[4m\033[37m■\033[0m\033[0m";
-				else if (color[(i * cols) + j] == 2) cout << " \033[4m\033[31m■\033[0m\033[0m";
-				else if (color[(i * cols) + j] == 3) cout << " \033[4m\033[33m■\033[0m\033[0m";
-				else if (color[(i * cols) + j] == 4) cout << " \033[4m\033[1;33m■\033[0m\033[0m";
-				else if (color[(i * cols) + j] == 5) cout << " \033[4m\033[32m■\033[0m\033[0m";				
-				else if (color[(i * cols) + j] == 6) cout << " \033[4m\033[36m■\033[0m\033[0m";
-				else if (color[(i * cols) + j] == 7) cout << " \033[4m\033[34m■\033[0m\033[0m";
-				else if (color[(i * cols) + j] == 8) cout << " \033[4m\033[35m■\033[0m\033[0m";
-				else if (color[(i * cols) + j] == 11) cout << " \033[4m\033[1;37m■\033[0m\033[0m";
-				else if (color[(i * cols) + j] == 12) cout << " \033[4m\033[1;31m■\033[0m\033[0m";
-				else if (color[(i * cols) + j] == 15) cout << " \033[4m\033[1;32m■\033[0m\033[0m";
-				else if (color[(i * cols) + j] == 16) cout << " \033[4m\033[1;36m■\033[0m\033[0m";
-				else if (color[(i * cols) + j] == 17) cout << " \033[4m\033[1;34m■\033[0m\033[0m";
-				else if (color[(i * cols) + j] == 18) cout << " \033[4m\033[1;35m■\033[0m\033[0m";
-				else if (color[(i * cols) + j] == 0) cout << " \033[4m \033[0m";
-				else cout << " \033[4m" << char(color[(i * cols) + j]) << "\033[0m";
-			}
-			
-			else
-			{
-				
-				if (color[(i * cols) + j] == 1) cout << "\033[0;37m ■\033[0m";
-				else if (color[(i * cols) + j] == 2) cout << "\033[0;31m ■\033[0m";
-				else if (color[(i * cols) + j] == 3) cout << "\033[0;33m ■\033[0m";
-				else if (color[(i * cols) + j] == 4) cout << "\033[1;33m ■\033[0m";
-				else if (color[(i * cols) + j] == 5) cout << "\033[0;32m ■\033[0m";
-				else if (color[(i * cols) + j] == 6) cout << "\033[0;36m ■\033[0m";
-				else if (color[(i * cols) + j] == 7) cout << "\033[0;34m ■\033[0m";
-				else if (color[(i * cols) + j] == 8) cout << "\033[0;35m ■\033[0m";
-				else if (color[(i * cols) + j] == 11) cout << "\033[1;37m ■\033[0m";
-				else if (color[(i * cols) + j] == 12) cout << "\033[1;31m ■\033[0m";
-				else if (color[(i * cols) + j] == 15) cout << "\033[1;32m ■\033[0m";
-				else if (color[(i * cols) + j] == 16) cout << "\033[1;36m ■\033[0m";
-				else if (color[(i * cols) + j] == 17) cout << "\033[1;34m ■\033[0m";
-				else if (color[(i * cols) + j] == 18) cout << "\033[1;35m ■\033[0m";
-				else if (color[(i * cols) + j] == 0) cout << "  ";
-				else cout << " " << char(color[(i * cols) + j]);
-				
-			}
-			
-			
-		}
-		cout << "|" << endl;
-	} 
-	cout << " ";
-	for (uint8_t i = 0; i < cols; i++) cout << "⎺⎺";
-	if (mode == 0) cout << endl << "Press the 'h' key for help";
-	if (mode == 1) cout << "\nText mode enabled - arrow key movement only and you may not resize the canvas, save the file, or reset the canvas - press the '~' key to return to command/paint mode";
-}
+int gkey();
+void setarea();
+int dir(const char *path);
 
 int main (int argc, char** argv)
 {	
-	for (int i = 0; i < lines * cols; i++) color.push_back(0);
+	for (int i = 0; i < lines * cols; i++) 
+	{
+		color.push_back(0);
+		character.push_back(0);
+	}
 	
 	if (argc == 2)
 	{
@@ -146,7 +69,7 @@ int main (int argc, char** argv)
 			}
 		}
 		
-		else if (mode == 1) for (uint8_t i = 0; i < sizeof(accepted); i++) if (accepted[i] == key) color[(y * cols) + x] = key;
+		else if (mode == 1) for (uint8_t i = 0; i < sizeof(accepted); i++) if (accepted[i] == key) character[(y * cols) + x] = key;
 		
 		if (key == 'q' && mode == 0)
 		{
@@ -154,29 +77,32 @@ int main (int argc, char** argv)
 			return 0;
 		}
 		
-		if (key == 'w' && y != 0 && mode == 0) y--;
-		if (key == 'a' && x != 0 && mode == 0) x--;
-		if (key == 's' && y < lines - 1 && mode == 0) y++;
-		if (key == 'd' && x < cols - 1 && mode == 0) x++;
+		if (mode == 0)
+		{	
+			// normal
+			if (key == '1') color[(y * cols) + x] = 1;
+			else if (key == '2') color[(y * cols) + x] = 2;
+			else if (key == '3') color[(y * cols) + x] = 3;
+			else if (key == '4') color[(y * cols) + x] = 4;
+			else if (key == '5') color[(y * cols) + x] = 5;
+			else if (key == '6') color[(y * cols) + x] = 6;
+			else if (key == '7') color[(y * cols) + x] = 7;
+			else if (key == '8') color[(y * cols) + x] = 8;
 		
-		// normal
-		if (key == '1' && mode == 0) color[(y * cols) + x] = 1;
-		if (key == '2' && mode == 0) color[(y * cols) + x] = 2;
-		if (key == '3' && mode == 0) color[(y * cols) + x] = 3;
-		if (key == '4' && mode == 0) color[(y * cols) + x] = 4;
-		if (key == '5' && mode == 0) color[(y * cols) + x] = 5;
-		if (key == '6' && mode == 0) color[(y * cols) + x] = 6;
-		if (key == '7' && mode == 0) color[(y * cols) + x] = 7;
-		if (key == '8' && mode == 0) color[(y * cols) + x] = 8;
+			//bold
+			else if (key == '!') color[(y * cols) + x] = 11;
+			else if (key == '@') color[(y * cols) + x] = 12;
+			else if (key == '%') color[(y * cols) + x] = 15;
+			else if (key == '^') color[(y * cols) + x] = 16;
+			else if (key == '&') color[(y * cols) + x] = 17;
+			else if (key == '*') color[(y * cols) + x] = 18;
+		}
 		
-		//bold
-		if (key == '!') color[(y * cols) + x] = 11;
-		if (key == '@') color[(y * cols) + x] = 12;
-		if (key == '%') color[(y * cols) + x] = 15;
-		if (key == '^') color[(y * cols) + x] = 16;
-		if (key == '&') color[(y * cols) + x] = 17;
-		if (key == '*') color[(y * cols) + x] = 18;
-		if (key == ' ') color[(y * cols) + x] = 0;
+		if (key == ' ')
+		{
+			color[(y * cols) + x] = 0;
+			character[(y * cols) + x] = 0;
+		}
 		
 		if (key == 'r' && mode == 0)
 		{
@@ -277,7 +203,7 @@ int main (int argc, char** argv)
 			cout << "termpaint: an application used to paint inside of a terminal - press keyboard keys to paint or do commands" << endl << endl << "(Press corresponding key on keyboard) Possible commands:" << endl << endl << "0  :  save file\n1  :  paint white  \033[37m■\033[0m  r\n";
 			cout << "2  :  paint red    \033[0;31m■\033[0m  a\n3  :  paint orange \033[0;33m■\033[0m  i\n4  :  paint yellow \033[1;33m■\033[0m  n\n5  :  paint green  \033[0;32m■\033[0m  b\n6  :  paint cyan   \033[0;36m■\033[0m  o\n7  :  paint blue   \033[0;34m■\033[0m  w\n8  :  paint purple \033[0;35m■\033[0m  !";
 			cout << "\nr  :  reset canvas\n;  :  resize canvas\nh  :  get help or exit help\nq  :  exit program without saving\nw or up arrow  :  move Y position up by one\na or left arrow  :  move X position left by one\ns or down arrow  :  move Y posiiton down by one\nd or right arrow  :  move X position right by one\n";
-			cout << "~  :  switch between typing mode and coloring/command mode\n\nPressing shift + the number you want to paint will give a lighter version of that color except for orange and yellow which do not have that function - Press enter to continue";
+			cout << "~  :  switch between typing mode and coloring/command mode\n\nPressing shift + the number you want to paint will give a lighter version of that color except for orange and yellow which do not have that function\nPress enter to continue";
 			cin.ignore();
 		}
 		
@@ -291,4 +217,130 @@ int main (int argc, char** argv)
 		setarea();
 	}
 	return 0;
+}
+
+int gkey() 
+{
+  system("/bin/stty raw");
+  int c;
+  system("/bin/stty -echo");
+  c = getc(stdin);
+  system("/bin/stty echo");
+  system("/bin/stty cooked");
+  return c;
+}
+
+void setarea()
+{
+	system("clear");
+	cout << "IRRADIX TERMPAINT v1.00 - ";
+	if (cols < 10) cout << "0";
+	cout << uint16_t(cols) << "x";
+	if (lines < 10) cout << "0";
+	cout << uint16_t(lines) << " canvas";
+	cout << endl << " ";
+	for (uint8_t i = 0; i < cols; i++) cout << "__";
+	cout << endl;
+	for (uint16_t i = 0; i < lines; i++)
+	{
+		cout << "|";
+		for (uint16_t j = 0; j < cols; j++)
+		{
+			if ((y * cols) + x == (i * cols) + j)
+			{
+				if (character[(i * cols) + j] == 0)
+				{
+					if (color[(i * cols) + j] == 0) cout << " \033[4m \033[0m";
+					else if (color[(i * cols) + j] == 1) cout << " \033[4m\033[37m■\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 2) cout << " \033[4m\033[31m■\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 3) cout << " \033[4m\033[33m■\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 4) cout << " \033[4m\033[1;33m■\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 5) cout << " \033[4m\033[32m■\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 6) cout << " \033[4m\033[36m■\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 7) cout << " \033[4m\033[34m■\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 8) cout << " \033[4m\033[35m■\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 11) cout << " \033[4m\033[1;37m■\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 12) cout << " \033[4m\033[1;31m■\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 15) cout << " \033[4m\033[1;32m■\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 16) cout << " \033[4m\033[1;36m■\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 17) cout << " \033[4m\033[1;34m■\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 18) cout << " \033[4m\033[1;35m■\033[0m\033[0m";
+				}
+				
+				else
+				{
+					if (color[(i * cols) + j] == 0) cout << " \033[4m" << char(character[(i * cols) + j]) << "\033[0m";
+					else if (color[(i * cols) + j] == 1) cout << " \033[4m\033[37m" << char(character[(i * cols) + j]) << "\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 2) cout << " \033[4m\033[31m" << char(character[(i * cols) + j]) << "\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 3) cout << " \033[4m\033[33m" << char(character[(i * cols) + j]) << "\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 4) cout << " \033[4m\033[1;33m" << char(character[(i * cols) + j]) << "\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 5) cout << " \033[4m\033[32m" << char(character[(i * cols) + j]) << "\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 6) cout << " \033[4m\033[36m" << char(character[(i * cols) + j]) << "\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 7) cout << " \033[4m\033[34m" << char(character[(i * cols) + j]) << "\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 8) cout << " \033[4m\033[35m" << char(character[(i * cols) + j]) << "\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 11) cout << " \033[4m\033[1;37m" << char(character[(i * cols) + j]) << "\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 12) cout << " \033[4m\033[1;31m" << char(character[(i * cols) + j]) << "\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 15) cout << " \033[4m\033[1;32m" << char(character[(i * cols) + j]) << "\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 16) cout << " \033[4m\033[1;36m" << char(character[(i * cols) + j]) << "\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 17) cout << " \033[4m\033[1;34m" << char(character[(i * cols) + j]) << "\033[0m\033[0m";
+					else if (color[(i * cols) + j] == 18) cout << " \033[4m\033[1;35m" << char(character[(i * cols) + j]) << "\033[0m\033[0m";
+				}
+			}
+			
+			else
+			{
+				if (character[(i * cols) + j] == 0)
+				{
+					if (color[(i * cols) + j] == 0) cout << "  ";
+					else if (color[(i * cols) + j] == 1) cout << " \033[37m■\033[0m";
+					else if (color[(i * cols) + j] == 2) cout << " \033[31m■\033[0m";
+					else if (color[(i * cols) + j] == 3) cout << " \033[33m■\033[0m";
+					else if (color[(i * cols) + j] == 4) cout << " \033[1;33m■\033[0m";
+					else if (color[(i * cols) + j] == 5) cout << " \033[32m■\033[0m";
+					else if (color[(i * cols) + j] == 6) cout << " \033[36m■\033[0m";
+					else if (color[(i * cols) + j] == 7) cout << " \033[34m■\033[0m";
+					else if (color[(i * cols) + j] == 8) cout << " \033[35m■\033[0m";
+					else if (color[(i * cols) + j] == 11) cout << " \033[1;37m■\033[0m";
+					else if (color[(i * cols) + j] == 12) cout << " \033[1;31m■\033[0m";
+					else if (color[(i * cols) + j] == 15) cout << " \033[1;32m■\033[0m";
+					else if (color[(i * cols) + j] == 16) cout << " \033[1;36m■\033[0m";
+					else if (color[(i * cols) + j] == 17) cout << " \033[1;34m■\033[0m";
+					else if (color[(i * cols) + j] == 18) cout << " \033[1;35m■\033[0m";
+				}
+				
+				else
+				{
+					if (color[(i * cols) + j] == 0) cout << " " << char(character[(i * cols) + j]);
+					if (color[(i * cols) + j] == 1) cout << " \033[37m" << char(character[(i * cols) + j]) << "\033[0m";
+					if (color[(i * cols) + j] == 2) cout << " \033[31m" << char(character[(i * cols) + j]) << "\033[0m";
+					if (color[(i * cols) + j] == 3) cout << " \033[33m" << char(character[(i * cols) + j]) << "\033[0m";
+					if (color[(i * cols) + j] == 4) cout << " \033[1;33m" << char(character[(i * cols) + j]) << "\033[0m";
+					if (color[(i * cols) + j] == 5) cout << " \033[32m" << char(character[(i * cols) + j]) << "\033[0m";
+					if (color[(i * cols) + j] == 6) cout << " \033[36m" << char(character[(i * cols) + j]) << "\033[0m";
+					if (color[(i * cols) + j] == 7) cout << " \033[34m" << char(character[(i * cols) + j]) << "\033[0m";
+					if (color[(i * cols) + j] == 8) cout << " \033[35m" << char(character[(i * cols) + j]) << "\033[0m";
+					if (color[(i * cols) + j] == 11) cout << " \033[1;37m" << char(character[(i * cols) + j]) << "\033[0m";
+					if (color[(i * cols) + j] == 12) cout << " \033[1;31m" << char(character[(i * cols) + j]) << "\033[0m";
+					if (color[(i * cols) + j] == 15) cout << " \033[1;32m" << char(character[(i * cols) + j]) << "\033[0m";
+					if (color[(i * cols) + j] == 16) cout << " \033[1;36m" << char(character[(i * cols) + j]) << "\033[0m";
+					if (color[(i * cols) + j] == 17) cout << " \033[1;34m" << char(character[(i * cols) + j]) << "\033[0m";
+					if (color[(i * cols) + j] == 18) cout << " \033[1;35m" << char(character[(i * cols) + j]) << "\033[0m";
+				}
+			}
+			
+		}
+		cout << "|" << endl;
+	} 
+	cout << " ";
+	for (uint8_t i = 0; i < cols; i++) cout << "⎺⎺";
+	if (mode == 0) cout << endl << "Double-click the 'h' key for help";
+	if (mode == 1) cout << "\nText mode enabled - arrow key movement only and you may not resize the canvas, save the file, or reset the canvas - press the '~' key to return to command/paint mode";
+}
+
+int dir(const char *path)
+{
+    struct stat stats;
+    stat(path, &stats);
+    if (S_ISDIR(stats.st_mode)) return 1;
+    return 0;
 }
