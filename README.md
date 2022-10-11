@@ -29,10 +29,10 @@ Space bar  :  Reset sector <br/>
 Pressing shift and a color at the same same will paint a lighter version of that color except for orange and yellow
 ### Commands
 R Key  :  Reset  canvas
-W or up arrow key  :  Change Y position on canvas up by one<br/>
-A or left arrow key  :  Change X position on canvas left by one<br/>
-S or down arrow key  :  Change Y position on canvas down by one<br/>
-D or right arrow key  :  Change X position on canvas right by one<br/>
+Up arrow key  :  Change Y position on canvas up by one<br/>
+Left arrow key  :  Change X position on canvas left by one<br/>
+Down arrow key  :  Change Y position on canvas down by one<br/>
+Right arrow key  :  Change X position on canvas right by one<br/>
 0 key  :  Save file<br/>
 ; key  :  Resize canvas<br/>
 ~ key  :  Switch between paint/command mode and typing mode<br/>
