@@ -10,7 +10,7 @@ Thanks to r2boyo25 for the ability to move around the canvas with the arrow keys
 3) Better file saving
 
 ## Future update ideas (top 3)
-1) Colored test
+1) Colored text
 2) User-made rectangles/squares
 3) Windows version
 
