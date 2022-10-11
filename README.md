@@ -11,9 +11,9 @@ Ability to move around canvas with arrow keys<br/>
 Better file saving<br/>
 
 ## Future update ideas
-Colored text-----------------☑<br/>
-User-made rectangles/squares-☐<br/>
-Windows version--------------☐<br/>
+Colored text ☑<br/>
+User-made rectangles/squares ☐<br/>
+Windows version ☐<br/>
 
 ## Usage:
 ### Colors:
