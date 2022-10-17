@@ -5,7 +5,8 @@ Alright, so I made this application because I really like terminal/kernel text e
 Thanks to r2boyo25 for the ability to move around the canvas with the arrow keys
 
 ## Most recent updates
-!!NEWEST!! - Colored text - You can now place text down then color it by switching to color mode<br/>
+!!NEWEST!! - Bug fixed where saving with colored text would render a file unreadable<br/>
+Colored text - You can now place text down then color it by switching to color mode<br/>
 Code readability and format as well as ability to switch between paint/command and text mode<br/>
 Ability to move around canvas with arrow keys<br/>
 Better file saving<br/>
