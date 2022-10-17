@@ -8,16 +8,13 @@
 #include <deque>
 using namespace std;
 
-uint8_t x = 0;
-uint8_t y = 0;
-uint16_t cols = 32;
-uint16_t lines = 32;
+uint8_t x = 0, y = 0;
+uint16_t cols = 32, lines = 32;
 char accepted[62] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 struct winsize w;
 uint8_t mode = 0;
 char key;
-deque<uint8_t> color;
-deque<uint8_t> character;
+deque<uint8_t> color, character;
 
 int gkey();
 void setarea();
@@ -42,7 +39,13 @@ int main (int argc, char** argv)
 			getline(file, fileinfo);
 			cols = fileinfo[0];
 			lines = fileinfo[1];
-			for (uint16_t i = 2; i < fileinfo.length(); i++) color[i - 2] = fileinfo[i];
+			uint16_t i, j = 0;
+			for (i = 2; i < (cols * lines) + 2; i++) color[i - 2] = fileinfo[i];
+			for (;i < fileinfo.length(); i++)
+			{
+				character[j] = fileinfo[i];
+				j++;
+			}
 		}
 	}
 	
@@ -145,6 +148,7 @@ int main (int argc, char** argv)
 					file.open(str, ios::binary | ios::out);
 					file << char(cols) << char(lines);
 					for (uint16_t i = 0; i < lines * cols; i++) file << char(color[i]);
+					for (uint16_t i = 0; i < lines * cols; i++) file << char(character[i]);
 				}
 				
 				else
@@ -154,6 +158,7 @@ int main (int argc, char** argv)
 						file.open(str, ios::binary | ios::out);
 						file << char(cols) << char(lines);
 						for (uint16_t i = 0; i < lines * cols; i++) file << char(color[i]);
+						for (uint16_t i = 0; i < lines * cols; i++) file << char(character[i]);
 					}
 					
 					else
