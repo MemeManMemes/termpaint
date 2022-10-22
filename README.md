@@ -18,7 +18,7 @@ Windows version ☐<br/>
 
 ## Usage:
 ### Colors:
-Space bar  :  Reset sector <br/>
+Backspace Key  :  Reset sector <br/>
 1 key  :  Paint white<br/>
 2 key  :  Paint red<br/>
 3 key  :  Paint orange<br/>
