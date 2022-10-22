@@ -44,7 +44,7 @@ int main (int argc, char** argv)
 			for (;i < fileinfo.length(); i++)
 			{
 				character[j] = fileinfo[i];
-				j++;
+				if ((y * cols) + x <= cols * lines) j++;
 			}
 		}
 	}
@@ -72,7 +72,16 @@ int main (int argc, char** argv)
 			}
 		}
 		
-		else if (mode == 1) for (uint8_t i = 0; i < sizeof(accepted); i++) if (accepted[i] == key) character[(y * cols) + x] = key;
+		else if (mode == 1 && key != ' ') for (uint8_t i = 0; i < sizeof(accepted); i++) if (accepted[i] == key) 
+		{
+			character[(y * cols) + x] = key;
+			if (y * cols + x < lines * cols && x == cols - 1) 
+			{
+				y++;
+				x = 0;
+			}
+			
+		}
 		
 		if (key == 'q' && mode == 0)
 		{
@@ -82,7 +91,6 @@ int main (int argc, char** argv)
 		
 		if (mode == 0)
 		{	
-			// normal
 			if (key == '1') color[(y * cols) + x] = 1;
 			else if (key == '2') color[(y * cols) + x] = 2;
 			else if (key == '3') color[(y * cols) + x] = 3;
@@ -101,7 +109,7 @@ int main (int argc, char** argv)
 			else if (key == '*') color[(y * cols) + x] = 18;
 		}
 		
-		if (key == ' ')
+		if (key == 127)
 		{
 			color[(y * cols) + x] = 0;
 			character[(y * cols) + x] = 0;
@@ -197,6 +205,9 @@ int main (int argc, char** argv)
 				y = 0;
 				for (uint16_t i = 0; i < size(color); i++) color.pop_front();
 				for (uint16_t i = 0; i < lines * cols; i++) color.push_front(0);
+				
+				for (uint16_t i = 0; i < size(color); i++) character.pop_front();
+				for (uint16_t i = 0; i < lines * cols; i++) character.push_front(0);
 			}
 			cout << "\e[?25l";
 		}
@@ -238,7 +249,7 @@ int gkey()
 void setarea()
 {
 	system("clear");
-	cout << "IRRADIX TERMPAINT v1.00 - ";
+	cout << "IRRADIX TERMPAINT - ";
 	if (cols < 10) cout << "0";
 	cout << uint16_t(cols) << "x";
 	if (lines < 10) cout << "0";
